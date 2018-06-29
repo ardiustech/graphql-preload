@@ -35,6 +35,7 @@ module GraphQL
       end
 
       private def preload_association(records)
+        records = records.select { |record| !association_loaded?(record) }
         ActiveRecord::Associations::Preloader.new.preload(records, association, preload_scope)
       end
 
